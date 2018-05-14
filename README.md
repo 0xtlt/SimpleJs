@@ -1,9 +1,28 @@
 # Simple-JS
 Simple js is made for simplify your javascript code without use jquery
 
-# How to use it ?
-
 # Functions s.
-Name | options
-----|----
-```post(url, data, callback)``` | `String` url, `String or function callback with one param` data, `Function callback with one param or void` callback
+
+### Post and Get request
+
+```javascript
+s.get('data.html', 'search=example', function(html){
+    //Callback function
+})
+
+s.get('data.html', function(html){
+    //Callback function
+})
+
+s.get('data.html', jsontourl([{ name: 'simple', value: 'js'}]), function(html){
+    //Callback function
+})
+
+s.post('data.html', jsontourl([{ name: 'simple', value: 'js'}]), function(html){
+    //Callback function
+})
+
+s.post('data.html', 'search=example', function(html){
+    //Callback function
+})
+```
