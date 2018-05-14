@@ -14,11 +14,11 @@ s.get('data.html', function(html){
     //Callback function
 })
 
-s.get('data.html', jsontourl([{ name: 'simple', value: 'js'}]), function(html){
+s.get('data.html', s.jsontourl([{ name: 'simple', value: 'js'}]), function(html){
     //Callback function
 })
 
-s.post('data.html', jsontourl([{ name: 'simple', value: 'js'}]), function(html){
+s.post('data.html', s.jsontourl([{ name: 'simple', value: 'js'}]), function(html){
     //Callback function
 })
 
