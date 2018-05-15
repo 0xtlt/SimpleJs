@@ -35,4 +35,10 @@ s.select('#container').toggleClass('multiple super class') //toggle several clas
 
 s.select('#container').insert('<h1>Hello world</h1>') //insert at the top
 s.select('#container').insert('<h1>Hello world</h1>', false) //insert at the bottom
+
+s.select('#container').html() //Return the html of the element
+s.select('#container').html('<h1>Hello world !</h1>') //Change the content of element
+
+s.select('#pseudo').val() //Return the value of the input pseudo
+s.select('#pseudo').val('Hello') //Change the value of the input pseudo | Let empty for remove the content
 ```

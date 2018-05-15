@@ -97,3 +97,21 @@ Object.prototype.insert = function (i, start = true) {
         this.append(i)
     }
 }
+
+Object.prototype.html = function (html = false) {
+    if(value === false){
+      return this.innerHTML
+    } else {
+      this.innerHTML = html
+      return true
+    }
+}
+
+Object.prototype.val = function (value = false) {
+  if(value === false){
+    return this.getAttribute('value')
+  } else {
+    this.setAttribute('value', value)
+    return true
+  }
+}
