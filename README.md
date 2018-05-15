@@ -31,4 +31,7 @@ s.post('data.html', 'search=example', function(html){
 
 ```javascript
 s.select('#container').toggleClass('superclass')
+
+s.select('#container').insert('<h1>Hello world</h1>') //insert at the top
+s.select('#container').insert('<h1>Hello world</h1>', false) //insert at the bottom
 ```

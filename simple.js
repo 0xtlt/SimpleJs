@@ -90,4 +90,10 @@ Object.prototype.toggleClass = function (i) {
     }
 }
 
-s.select('#navbar').toggleClass('hide world pp')
+Object.prototype.insert = function (i, start = true) {
+    if(start){
+        this.prepend(i)
+    } else {
+        this.append(i)
+    }
+}
