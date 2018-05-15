@@ -26,3 +26,9 @@ s.post('data.html', 'search=example', function(html){
     //Callback function
 })
 ```
+
+### DOM manipulation
+
+```javascript
+s.select('#container').toggleClass('superclass')
+```
