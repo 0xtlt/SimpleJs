@@ -60,7 +60,7 @@ var s = {
             }
         }
     },
-    jsontourl: function (json) {
+    jsonToUrl: function (json) {
         if(json === undefined){
             console.log('Error')
             return false
