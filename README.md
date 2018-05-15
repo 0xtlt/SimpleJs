@@ -50,4 +50,4 @@ s.select('#myinput').check_input({
   max_letters: 10,
   forbidden_characters: ['super', 'input']
 }) // Return true if all conditions are okay
-``
+```
