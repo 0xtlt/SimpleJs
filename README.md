@@ -42,3 +42,12 @@ s.select('#container').html('<h1>Hello world !</h1>') //Change the content of el
 s.select('#pseudo').val() //Return the value of the input pseudo
 s.select('#pseudo').val('Hello') //Change the value of the input pseudo | Let empty for remove the content
 ```
+
+### Form manipulation
+```javascript
+s.select('#myinput').check_input({
+  min_letters: 5,
+  max_letters: 10,
+  forbidden_characters: ['super', 'input']
+}) // Return true if all conditions are okay
+``

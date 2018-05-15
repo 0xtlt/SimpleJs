@@ -115,3 +115,32 @@ Object.prototype.val = function (value = false) {
     return true
   }
 }
+
+Object.prototype.check_input = function(params = {min_letters: 2, max_letters: 50, forbidden_characters: []}){
+  var default_params = {min_letters: 2, max_letters: 50, forbidden_characters: []}
+  if(params.min_letters !== undefined){
+    default_params.min_letters = params.min_letters
+  }
+  if(params.max_letters !== undefined){
+    default_params.max_letters = params.max_letters
+  }
+  if(params.forbidden_characters !== undefined){
+    default_params.forbidden_characters = params.forbidden_characters
+  }
+
+  if(this.value.length < default_params.min_letters){
+    return false
+  } else {
+    if(this.value.length > default_params.max_letters){
+      return false
+    } else {
+      var final = true
+      for(i = 0; i <= default_params.forbidden_characters.length - 1; i++){
+        if(this.value.indexOf(default_params.forbidden_characters[i]) != "-1"){
+          final = false
+        }
+      }
+      return final
+    }
+  }
+}
