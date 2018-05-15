@@ -84,25 +84,10 @@ var s = {
 //Prototype functions
 
 Object.prototype.toggleClass = function (i) {
-    actual = this.className.split(' ')
-    ne = i.split(' ')
-    for(o = 0; o <= ne.length -1; o++){
-        if(actual.indexOf(ne[o])){
-            actual.split(o)
-        } else {
-            actual.push(ne[0])
-        }
+    var words = i.split(' ')
+    for(n = 0; n <= words.length - 1; n++){
+        this.classList.toggle(words[n])
     }
-
-    class_final = ''
-
-    for(v = 0; v <= actual.length - 1; v++){
-        if(v === 0){
-            class_final += actual[v]
-        } else {
-            class_final += ' '+actual[v]
-        }
-    }
-
-    this.className = class_final
 }
+
+s.select('#navbar').toggleClass('hide world pp')
