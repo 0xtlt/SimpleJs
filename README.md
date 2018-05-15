@@ -30,7 +30,8 @@ s.post('data.html', 'search=example', function(html){
 ### DOM manipulation
 
 ```javascript
-s.select('#container').toggleClass('superclass')
+s.select('#container').toggleClass('superclass') //toggle one class
+s.select('#container').toggleClass('multiple super class') //toggle several class
 
 s.select('#container').insert('<h1>Hello world</h1>') //insert at the top
 s.select('#container').insert('<h1>Hello world</h1>', false) //insert at the bottom
