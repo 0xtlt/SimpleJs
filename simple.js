@@ -99,7 +99,7 @@ Object.prototype.insert = function (i, start = true) {
 }
 
 Object.prototype.html = function (html = false) {
-    if(value === false){
+    if(html === false){
       return this.innerHTML
     } else {
       this.innerHTML = html
