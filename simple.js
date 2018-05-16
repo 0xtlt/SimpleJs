@@ -1,5 +1,6 @@
-var s = {
-    post: function (url, data, callback) {
+var s;
+(function(s){
+    s.post = function (url, data, callback) {
         if(data === undefined && callback === undefined){
             xmlHttp = new XMLHttpRequest();
             xmlHttp.timeout = 4000
@@ -31,8 +32,8 @@ var s = {
                 xmlHttp.send(data);
             }
         }
-    },
-    get: function (url, data, callback) {
+    }
+    s.get = function (url, data, callback) {
         if(data === undefined && callback === undefined){
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.timeout = 4000
@@ -59,8 +60,8 @@ var s = {
                 xmlHttp.send(data);
             }
         }
-    },
-    jsonToUrl: function (json) {
+    }
+    s.jsonToUrl = function (json) {
         if(json === undefined){
             console.log('Error')
             return false
@@ -75,11 +76,11 @@ var s = {
             }
             return url
         }
-    },
-    select: function (i) {
+    }
+    s.select = function (i) {
         return document.querySelector(i)
     }
-}
+})(s || (s = {}))
 
 //Prototype functions
 
