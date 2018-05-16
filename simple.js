@@ -1,5 +1,8 @@
 var s;
 (function(s){
+
+  var mouse = [{x: 0,y: 0}]
+
     s.post = function (url, data, callback) {
         if(data === undefined && callback === undefined){
             xmlHttp = new XMLHttpRequest();
@@ -79,6 +82,68 @@ var s;
     }
     s.select = function (i) {
         return document.querySelector(i)
+    }
+
+    // Mobile swipe
+
+    var params_swipe = {toTop: function(){}, toBottom: function(){}, toLeft: function(){}, toRight: function(){}}
+
+    function printMousePos(event, params) {
+      var screen_width = document.body.offsetWidth
+      var screen_height = document.body.offsetHeight
+      var start = mouse[0].x
+      var startY = mouse[0].y
+      var doit = ((screen_width / 3) * 2)
+      var doitY = ((screen_height / 3) * 2)
+      var end = event.changedTouches[0].clientX - start
+      var endY = event.changedTouches[0].clientY - startY
+
+      if(end > doit){
+          mouse = []
+          params_swipe.toRight()
+      } else if(end < -doit) {
+          params_swipe.toLeft()
+          mouse = []
+      } else if(endY > doitY){
+          params_swipe.toBottom()
+          mouse = []
+      } else if(endY < -doitY){
+          params_swipe.toTop()
+          mouse = []
+      }
+    }
+
+    let pointer = (e) => {
+        mouse.push({
+            x: e.changedTouches[0].clientX,
+            y: e.changedTouches[0].clientY
+        })
+    };
+
+    let pointerstart = (e) => {
+        mouse = []
+        mouse.push({
+            x: e.changedTouches[0].clientX,
+            y: e.changedTouches[0].clientY
+        })
+    }
+    s.mobileswipe = function(params = {toTop: function(){}, toBottom: function(){}, toLeft: function(){}, toRight: function(){}}){
+      if(params.toTop !== undefined){
+        params_swipe.toTop = params.toTop
+      }
+      if(params.toBottom !== undefined){
+        params_swipe.toBottom = params.toBottom
+      }
+      if(params.toLeft !== undefined){
+        params_swipe.toLeft = params.toLeft
+      }
+      if(params.toRight !== undefined){
+        params_swipe.toRight = params.toRight
+      }
+      document.addEventListener("touchstart", pointerstart, false);
+      document.addEventListener("touchend", printMousePos, false);
+      document.addEventListener("touchcancel", pointer, false);
+      document.addEventListener("touchmove", pointer, false);
     }
 })(s || (s = {}))
 

@@ -51,3 +51,21 @@ s.select('#myinput').check_input({
   forbidden_characters: ['super', 'input']
 }) // Return true if all conditions are okay
 ```
+
+### Mobile manipulation
+```javascript
+s.mobileswipe({
+  toLeft: function(){
+    //callback function
+  },
+  toRight: function(){
+    //callback function
+  },
+  toTop: function(){
+    //callback function
+  },
+  toBottom: function(){
+    //callback function
+  }
+})
+```
