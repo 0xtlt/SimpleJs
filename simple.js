@@ -84,6 +84,8 @@ var s;
         return document.querySelector(i)
     }
 
+
+
     // Mobile swipe
 
     var params_swipe = {toTop: function(){}, toBottom: function(){}, toLeft: function(){}, toRight: function(){}}
@@ -209,4 +211,12 @@ Object.prototype.check_input = function(params = {min_letters: 2, max_letters: 5
       return final
     }
   }
+}
+
+Object.prototype.sup = function (element) {
+    if(element !== undefined){
+        return this.querySelector(element)
+    } else {
+        return false
+    }
 }
