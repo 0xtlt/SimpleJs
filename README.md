@@ -43,6 +43,10 @@ s.select('#pseudo').val() //Return the value of the input pseudo
 s.select('#pseudo').val('Hello') //Change the value of the input pseudo | Let empty for remove the content
 
 s.select('#element').sup('span') //Return the value of span in #element
+
+s.select('#element').press(function(){
+  // Callback function when #element is pressed
+})
 ```
 
 ### Form manipulation

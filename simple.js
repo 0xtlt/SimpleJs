@@ -220,3 +220,7 @@ Object.prototype.sup = function (element) {
         return false
     }
 }
+
+Object.prototype.press = function(callback = function(){}){
+  this.onclick = callback
+}
