@@ -67,5 +67,5 @@ s.mobileswipe({
   toBottom: function(){
     //callback function
   }
-})
+}) //This function can be used once
 ```
