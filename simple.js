@@ -156,6 +156,7 @@ Object.prototype.toggleClass = function (i) {
     for(n = 0; n <= words.length - 1; n++){
         this.classList.toggle(words[n])
     }
+    return this
 }
 
 Object.prototype.insert = function (i, start = true) {
@@ -164,6 +165,7 @@ Object.prototype.insert = function (i, start = true) {
     } else {
         this.append(i)
     }
+    return this
 }
 
 Object.prototype.html = function (html = false) {
@@ -171,7 +173,7 @@ Object.prototype.html = function (html = false) {
       return this.innerHTML
     } else {
       this.innerHTML = html
-      return true
+      return this
     }
 }
 
@@ -180,7 +182,7 @@ Object.prototype.val = function (value = false) {
     return this.getAttribute('value')
   } else {
     this.setAttribute('value', value)
-    return true
+    return this
   }
 }
 
@@ -217,10 +219,11 @@ Object.prototype.sup = function (element) {
     if(element !== undefined){
         return this.querySelector(element)
     } else {
-        return false
+        return this
     }
 }
 
 Object.prototype.press = function(callback = function(){}){
-  this.onclick = callback
+    this.onclick = callback
+    return this
 }
