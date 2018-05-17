@@ -159,15 +159,6 @@ Object.prototype.toggleClass = function (i) {
     return this
 }
 
-Object.prototype.insert = function (i, start = true) {
-    if(start){
-        this.prepend(i)
-    } else {
-        this.append(i)
-    }
-    return this
-}
-
 Object.prototype.html = function (html = false) {
     if(html === false){
       return this.innerHTML
