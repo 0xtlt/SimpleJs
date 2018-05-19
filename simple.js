@@ -114,6 +114,31 @@ var s;
       }
     }
 
+    var syspages = []
+    s.pages = function(pages_ = []){
+      if(pages_.length === 0){
+        return false
+      } else {
+        for(i = 0; i <= pages_.length - 1; i++){
+          syspages.push({
+            name: pages_[i].name,
+            el: pages_[i].el
+          })
+          if(i !== 0){
+            s.select(pages_[i].el).style.display = 'none'
+          }
+        }
+      }
+    }
+    s.page = function(page = ''){
+        for(i = 0; i <= syspages.length - 1; i++){
+          if(page === syspages[i].name){
+            s.select(syspages[i].el).style.display = 'inherit'
+          } else {
+            s.select(syspages[i].el).style.display = 'none'
+          }
+        }
+    }
 
 
     // Mobile swipe
@@ -245,7 +270,7 @@ Object.prototype.sup = function (element) {
 }
 
 Object.prototype.press = function(callback = function(){}){
-    this.onclick = callback
+    this.onclick = callback(this)
     return this
 }
 
@@ -278,6 +303,43 @@ Object.prototype.diff = function(json = {value: '', condition: '', iftrue: funct
       }
     } else {
       if(json.value != json.condition){
+        whatelse.iftrue(this)
+      } else {
+        whatelse.ifalse(this)
+      }
+    }
+  }
+}
+
+Object.prototype.equal = function(json = {value: '', condition: '', iftrue: function(){}, ifalse: function(){}, strict: false}){
+  var whatelse = {value: '', condition: '', iftrue: function(){}, ifalse: function(){}, strict: false}
+  if(json.iftrue !== undefined){
+    whatelse.iftrue = json.iftrue
+  }
+  if(json.iffalse !== undefined){
+    whatelse.iffalse = json.iffalse
+  }
+  if(json.strict !== undefined){
+    whatelse.strict = json.strict
+  }
+  if(json.value === undefined || json.condition === undefined){
+    return false
+  } else {
+    if(typeof(json.condition) === 'function'){
+      if(json.condition(value)){
+        whatelse.iftrue(this)
+      } else {
+        whatelse.ifalse(this)
+      }
+    }
+    if(whatelse.strict){
+      if(json.value === json.condition){
+        whatelse.iftrue(this)
+      } else {
+        whatelse.ifalse(this)
+      }
+    } else {
+      if(json.value == json.condition){
         whatelse.iftrue(this)
       } else {
         whatelse.ifalse(this)

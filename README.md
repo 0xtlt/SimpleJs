@@ -58,7 +58,30 @@ s.select('#myID').diff({
       element.toggleClass('hello') //for example
     }
 }) //if the value is different of the condition, iftrue will be executed else ifalse will be executed
+
+//at the inverse of s.select('#myID').diff you can use s.select('#myID').equal
 ```
+
+### Pages manipulation
+If you want to create a multiples interfaces in your webapp, you can use the functions s.pages and s.page
+```javascript
+//initialize the pages with s.pages | the first value will be display automatically when script will be terminated
+s.pages([
+  {
+    name: 'home',
+    el: '#myhomepage'
+  },
+  {
+    name: 'login',
+    el: '#myloginpage'
+  }//etc...
+])
+
+//now you can change the display page
+s.page('login')
+s.page('home') //etc...
+
+``
 
 ### Form manipulation
 ```javascript
