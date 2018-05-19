@@ -1,6 +1,8 @@
 var s;
 (function(s){
 
+  var now = []
+
   var mouse = [{x: 0,y: 0}]
 
     s.post = function (url, data, callback) {
@@ -84,6 +86,32 @@ var s;
     }
     s.select = function (i) {
         return document.querySelector(i)
+    }
+    s.change = function(element, html){
+      if(element.substr(0, 1) === '#'){
+        var found = false
+        if(now.length !== 0){
+          for(i = 0; i <= now.length - 1; i++){
+            if(now[i].el === element){
+              found = true
+              if(now[i].html !== html){
+                now[i].html = html
+                s.select(element).html(html)
+              }
+            }
+          }
+        }
+        if(found === false){
+          now.push({
+            el: element,
+            html: html
+          })
+          s.select(element).html(html)
+        }
+        return true
+      } else {
+        return false
+      }
     }
 
 

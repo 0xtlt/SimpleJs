@@ -44,6 +44,8 @@ s.select('#element').sup('span') //Return the value of span in #element
 s.select('#element').press(function(){
   // Callback function when #element is pressed
 })
+
+s.change('#myID', '<h1>My html</h1>') //If a change in the html between the given value and the previous value then the id will be updated |only works with IDs and with html
 ```
 
 ### Form manipulation
