@@ -52,10 +52,10 @@ s.select('#myID').diff({
     value: 1,
     condition: 0, //the condition can be a function(value){} who return true or false
     ifalse: function (element) {
-      element.toggleClass('hello') //for exemple
+      element.toggleClass('hello') //for example
     },
     iftrue: function (element) {
-      element.toggleClass('hello') //for exemple
+      element.toggleClass('hello') //for example
     }
 }) //if the value is different of the condition, iftrue will be executed else ifalse will be executed
 ```
