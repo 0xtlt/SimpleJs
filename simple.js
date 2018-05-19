@@ -248,3 +248,40 @@ Object.prototype.press = function(callback = function(){}){
     this.onclick = callback
     return this
 }
+
+Object.prototype.diff = function(json = {value: '', condition: '', iftrue: function(){}, ifalse: function(){}, strict: false}){
+  var whatelse = {value: '', condition: '', iftrue: function(){}, ifalse: function(){}, strict: false}
+  if(json.iftrue !== undefined){
+    whatelse.iftrue = json.iftrue
+  }
+  if(json.iffalse !== undefined){
+    whatelse.iffalse = json.iffalse
+  }
+  if(json.strict !== undefined){
+    whatelse.strict = json.strict
+  }
+  if(json.value === undefined || json.condition === undefined){
+    return false
+  } else {
+    if(typeof(json.condition) === 'function'){
+      if(json.condition(value)){
+        whatelse.iftrue(this)
+      } else {
+        whatelse.ifalse(this)
+      }
+    }
+    if(whatelse.strict){
+      if(json.value !== json.condition){
+        whatelse.iftrue(this)
+      } else {
+        whatelse.ifalse(this)
+      }
+    } else {
+      if(json.value != json.condition){
+        whatelse.iftrue(this)
+      } else {
+        whatelse.ifalse(this)
+      }
+    }
+  }
+}

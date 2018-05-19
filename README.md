@@ -46,6 +46,18 @@ s.select('#element').press(function(){
 })
 
 s.change('#myID', '<h1>My html</h1>') //If a change in the html between the given value and the previous value then the id will be updated |only works with IDs and with html
+
+s.select('#myID').diff({
+    strict: false, //if strict is on true, the verification will verify the type over the value
+    value: 1,
+    condition: 0, //the condition can be a function(value){} who return true or false
+    ifalse: function (element) {
+      element.toggleClass('hello') //for exemple
+    },
+    iftrue: function (element) {
+      element.toggleClass('hello') //for exemple
+    }
+}) //if the value is different of the condition, iftrue will be executed else ifalse will be executed
 ```
 
 ### Form manipulation
