@@ -270,7 +270,7 @@ Object.prototype.sup = function (element) {
 }
 
 Object.prototype.press = function(callback = function(){}){
-    this.onclick = callback(this)
+    this.addEventListener("click", callback, false)
     return this
 }
 
