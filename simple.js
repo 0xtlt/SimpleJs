@@ -41,6 +41,7 @@ var s;
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.timeout = 4000
             xmlHttp.open("GET", url, true);
+            xmlHttp.send();
         } else {
             if(callback === undefined){
                 xmlHttp = new XMLHttpRequest();
@@ -51,6 +52,7 @@ var s;
 
                 xmlHttp.timeout = 4000
                 xmlHttp.open("GET", url, true);
+                xmlHttp.send();
             } else {
                 xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() {
