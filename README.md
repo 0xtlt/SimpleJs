@@ -81,7 +81,7 @@ s.pages([
 s.page('login')
 s.page('home') //etc...
 
-``
+```
 
 ### Form manipulation
 ```javascript
