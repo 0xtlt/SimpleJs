@@ -150,8 +150,8 @@ var simple;
       var screen_height = document.body.offsetHeight
       var start = mouse[0].x
       var startY = mouse[0].y
-      var doit = ((screen_width / 3) * 2)
-      var doitY = ((screen_height / 3) * 2)
+      var doit = ((screen_width / 3) * 1)
+      var doitY = ((screen_height / 3) * 1)
       var end = event.changedTouches[0].clientX - start
       var endY = event.changedTouches[0].clientY - startY
 
