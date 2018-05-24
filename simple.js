@@ -1,11 +1,11 @@
-var s;
-(function(s){
+var simple;
+(function(simple){
 
   var now = []
 
   var mouse = [{x: 0,y: 0}]
 
-    s.post = function (url, data, callback) {
+    simple.post = function (url, data, callback) {
         if(data === undefined && callback === undefined){
             xmlHttp = new XMLHttpRequest();
             xmlHttp.timeout = 4000
@@ -38,7 +38,7 @@ var s;
             }
         }
     }
-    s.get = function (url, data, callback) {
+    simple.get = function (url, data, callback) {
         if(data === undefined && callback === undefined){
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.timeout = 4000
@@ -68,7 +68,7 @@ var s;
             }
         }
     }
-    s.jsonToUrl = function (json) {
+    simple.jsonToUrl = function (json) {
         if(json === undefined){
             console.log('Error')
             return false
@@ -84,10 +84,10 @@ var s;
             return url
         }
     }
-    s.select = function (i) {
+    simple.select = function (i) {
         return document.querySelector(i)
     }
-    s.change = function(element, html){
+    simple.change = function(element, html){
       if(element.substr(0, 1) === '#'){
         var found = false
         if(now.length !== 0){
@@ -96,7 +96,7 @@ var s;
               found = true
               if(now[i].html !== html){
                 now[i].html = html
-                s.select(element).html(html)
+                simple.select(element).html(html)
               }
             }
           }
@@ -106,7 +106,7 @@ var s;
             el: element,
             html: html
           })
-          s.select(element).html(html)
+          simple.select(element).html(html)
         }
         return true
       } else {
@@ -115,7 +115,7 @@ var s;
     }
 
     var syspages = []
-    s.pages = function(pages_ = []){
+    simple.pages = function(pages_ = []){
       if(pages_.length === 0){
         return false
       } else {
@@ -125,17 +125,17 @@ var s;
             el: pages_[i].el
           })
           if(i !== 0){
-            s.select(pages_[i].el).style.display = 'none'
+            simple.select(pages_[i].el).style.display = 'none'
           }
         }
       }
     }
-    s.page = function(page = ''){
+    simple.page = function(page = ''){
         for(i = 0; i <= syspages.length - 1; i++){
           if(page === syspages[i].name){
-            s.select(syspages[i].el).style.display = 'inherit'
+            simple.select(syspages[i].el).style.display = 'inherit'
           } else {
-            s.select(syspages[i].el).style.display = 'none'
+            simple.select(syspages[i].el).style.display = 'none'
           }
         }
     }
@@ -184,7 +184,7 @@ var s;
             y: e.changedTouches[0].clientY
         })
     }
-    s.mobileswipe = function(params = {toTop: function(){}, toBottom: function(){}, toLeft: function(){}, toRight: function(){}}){
+    simple.mobileswipe = function(params = {toTop: function(){}, toBottom: function(){}, toLeft: function(){}, toRight: function(){}}){
       if(params.toTop !== undefined){
         params_swipe.toTop = params.toTop
       }
@@ -202,7 +202,7 @@ var s;
       document.addEventListener("touchcancel", pointer, false);
       document.addEventListener("touchmove", pointer, false);
     }
-})(s || (s = {}))
+})(simple || (simple = {}))
 
 //Prototype functions
 
