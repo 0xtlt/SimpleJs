@@ -114,10 +114,9 @@ ss.mobileswipe({
 ```
 
 # Beta Functions
-### TurboOn
+### TurboOn ~ Make page transitions on your website faster
 Why use TurboOn ?  
 `TurboOn was created to free up your browser resources and server bandwidth by reloading only what is important for the navigation.`  
-Make page transitions on your website faster
 ```javascript
 ss.turboOn(); // Just add this on your javascript code for launch the beast
 ```
