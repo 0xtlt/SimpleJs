@@ -211,9 +211,8 @@ let ss = Object;
         }
     };
 
-    // TURBO PAGE FUNCTION | future function, do not use please
+    // TURBO PAGE FUNCTION | future function
 
-    // let turbo_css = [];
     let actual_turbo_page = 'nolaunched.nodejs';
     let functions_events = [];
     const execute_all_turbo_functions = function(){
