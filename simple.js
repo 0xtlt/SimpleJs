@@ -78,7 +78,6 @@ let ss = Object;
             let xmlHttp = new XMLHttpRequest();
             xmlHttp.timeout = 4000;
             xmlHttp.open("GET", url, true);
-            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlHttp.send(data);
         } else {
             let default_params = {
@@ -114,7 +113,6 @@ let ss = Object;
 
             xmlHttp.timeout = 4000;
             xmlHttp.open("GET", url, true);
-            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlHttp.send(ss.jsonToUrl(default_params.params));
         }
     };
@@ -213,13 +211,52 @@ let ss = Object;
         }
     };
 
-    // TURBO PAGE FUNCTION
+    // TURBO PAGE FUNCTION | future function, do not use please
 
     ss.turboOn = function(){
-
+        ss.el('a').forEach((el) => {
+            let link = el.getAttribute('href');
+            let unique_id = 0;
+            if(el.getAttribute('ss-turbo') === null){
+                unique_id = guid();
+                el.setAttribute('ss-turbo', unique_id);
+            } else {
+                unique_id = el.getAttribute('ss-turbo');
+            }
+            el.press((e) => {
+                ss.get(e.target.getAttribute('href').substr(1), {
+                    success: function (result) {
+                        if(result.indexOf('<body>') === -1){
+                            console.warn('error on turboOn() call function')
+                        } else {
+                            let newhtml = (new DOMParser()).parseFromString(result, "text/html").body;
+                            newhtml.sel('script').forEach((e) => {
+                                if(e.getAttribute('ss-turbo-reload') === 'false'){
+                                    console.log('removed !');
+                                    e.remove();
+                                }
+                            });
+                            ss.el('body').html('');
+                            ss.el('body').html(newhtml.html());
+                            ss.turboOn();
+                        }
+                    }
+                })
+            });
+            el.setAttribute('href', '#'+link)
+        })
     };
 
     // PROTOTYPE FUNCTIONS
+
+    ss.prototype.sel = function (el) {
+        let le = this.querySelectorAll(el);
+        if(le.length === 1){
+            return le[0]
+        } else {
+            return le
+        }
+    };
 
     ss.prototype.html = function (html = false) {
         if(html === false){
@@ -234,7 +271,7 @@ let ss = Object;
         if(value === false){
             return this.value
         } else {
-            this.value = value
+            this.value = value;
             return this
         }
     };
