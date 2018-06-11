@@ -213,6 +213,7 @@ let ss = Object;
 
     // TURBO PAGE FUNCTION | future function, do not use please
 
+    // let turbo_css = [];
     let actual_turbo_page = 'nolaunched.nodejs';
     let functions_events = [];
     const execute_all_turbo_functions = function(){
@@ -230,17 +231,18 @@ let ss = Object;
                        console.warn('error on turboOn() call function')
                    } else {
                        let extdom = (new DOMParser()).parseFromString(result, "text/html");
-                       let newhtml = extdom.body;
-                       newhtml.sel('script').forEach((e) => {
+                       extdom.body.sel('script').forEach((e) => {
                            if(e.getAttribute('ss-turbo-reload') === 'false'){
                                e.remove();
                            }
                        });
-                       ss.el('body').html('');
-                       if(extdom.title !== undefined){
-                           document.title = extdom.title
-                       }
-                       ss.el('body').html(newhtml.html());
+                       extdom.head.sel('script').forEach((e) => {
+                           if(e.getAttribute('ss-turbo-reload') === 'false'){
+                               e.remove();
+                           }
+                       });
+                       document.head = extdom.head;
+                       document.body = extdom.body;
                        ss.turboOn();
                        execute_all_turbo_functions();
                    }
@@ -265,17 +267,18 @@ let ss = Object;
                                 console.error('error on turboOn() call function')
                             } else {
                                 let extdom = (new DOMParser()).parseFromString(result, "text/html");
-                                let newhtml = extdom.body;
-                                newhtml.sel('script').forEach((e) => {
+                                extdom.body.sel('script').forEach((e) => {
                                     if(e.getAttribute('ss-turbo-reload') === 'false'){
                                         e.remove();
                                     }
                                 });
-                                ss.el('body').html('');
-                                ss.el('body').html(newhtml.html());
-                                if(extdom.title !== undefined){
-                                    document.title = extdom.title
-                                }
+                                extdom.head.sel('script').forEach((e) => {
+                                    if(e.getAttribute('ss-turbo-reload') === 'false'){
+                                        e.remove();
+                                    }
+                                });
+                                document.head = extdom.head;
+                                document.body = extdom.body;
                                 ss.turboOn();
                                 execute_all_turbo_functions();
                             }
