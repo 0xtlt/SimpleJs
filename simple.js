@@ -63,7 +63,7 @@ let ss = Object;
             let xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-                    default_params.params(xmlHttp.responseText);
+                    default_params.success(xmlHttp.responseText);
             };
 
             xmlHttp.timeout = 4000;
@@ -109,7 +109,7 @@ let ss = Object;
             let xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-                    default_params.params(xmlHttp.responseText);
+                    default_params.success(xmlHttp.responseText);
             };
 
             xmlHttp.timeout = 4000;
@@ -211,6 +211,12 @@ let ss = Object;
                 ss.el(syspages[i].el).style = 'display: none'
             }
         }
+    };
+
+    // TURBO PAGE FUNCTION
+
+    ss.turboOn = function(){
+
     };
 
     // PROTOTYPE FUNCTIONS
