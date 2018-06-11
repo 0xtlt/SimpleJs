@@ -193,7 +193,7 @@ let ss = Object;
                 syspages.push({
                     name: pages_[i].name,
                     el: pages_[i].el
-                })
+                });
                 if(i !== 0){
                     ss.el(pages_[i].el).style = 'diplay: none'
                 }
@@ -213,38 +213,84 @@ let ss = Object;
 
     // TURBO PAGE FUNCTION | future function, do not use please
 
+    let actual_turbo_page = 'nolaunched.nodejs';
+    let functions_events = [];
+    const execute_all_turbo_functions = function(){
+      functions_events.forEach((callback) => {
+          callback(window.location.pathname);
+      });
+    };
+
+    setInterval(() => {
+       if(actual_turbo_page !== 'nolaunched.nodejs' && actual_turbo_page !== window.location.pathname){
+           actual_turbo_page = window.location.pathname;
+           ss.get(window.location.pathname, {
+               success: function (result) {
+                   if(result.indexOf('<body>') === -1){
+                       console.warn('error on turboOn() call function')
+                   } else {
+                       let extdom = (new DOMParser()).parseFromString(result, "text/html");
+                       let newhtml = extdom.body;
+                       newhtml.sel('script').forEach((e) => {
+                           if(e.getAttribute('ss-turbo-reload') === 'false'){
+                               e.remove();
+                           }
+                       });
+                       ss.el('body').html('');
+                       if(extdom.title !== undefined){
+                           document.title = extdom.title
+                       }
+                       ss.el('body').html(newhtml.html());
+                       ss.turboOn();
+                       execute_all_turbo_functions();
+                   }
+               }
+           })
+
+       }
+    }, 100);
+
     ss.turboOn = function(){
+        actual_turbo_page = window.location.pathname;
         ss.el('a').forEach((el) => {
             let link = el.getAttribute('href');
-            let unique_id = 0;
-            if(el.getAttribute('ss-turbo') === null){
-                unique_id = guid();
-                el.setAttribute('ss-turbo', unique_id);
+            if(link.indexOf(window.location.host) === -1 && link.substr(0, 4) === 'http'){
+                return false
             } else {
-                unique_id = el.getAttribute('ss-turbo');
-            }
-            el.press((e) => {
-                ss.get(e.target.getAttribute('href').substr(1), {
-                    success: function (result) {
-                        if(result.indexOf('<body>') === -1){
-                            console.warn('error on turboOn() call function')
-                        } else {
-                            let newhtml = (new DOMParser()).parseFromString(result, "text/html").body;
-                            newhtml.sel('script').forEach((e) => {
-                                if(e.getAttribute('ss-turbo-reload') === 'false'){
-                                    console.log('removed !');
-                                    e.remove();
+                el.press((e) => {
+                    window.history.pushState('', '', e.target.getAttribute('ss-turbo-link'));
+                    ss.get(e.target.getAttribute('ss-turbo-link'), {
+                        success: function (result) {
+                            if(result.indexOf('<body>') === -1){
+                                console.error('error on turboOn() call function')
+                            } else {
+                                let extdom = (new DOMParser()).parseFromString(result, "text/html");
+                                let newhtml = extdom.body;
+                                newhtml.sel('script').forEach((e) => {
+                                    if(e.getAttribute('ss-turbo-reload') === 'false'){
+                                        e.remove();
+                                    }
+                                });
+                                ss.el('body').html('');
+                                ss.el('body').html(newhtml.html());
+                                if(extdom.title !== undefined){
+                                    document.title = extdom.title
                                 }
-                            });
-                            ss.el('body').html('');
-                            ss.el('body').html(newhtml.html());
-                            ss.turboOn();
+                                ss.turboOn();
+                                execute_all_turbo_functions();
+                            }
                         }
-                    }
-                })
-            });
-            el.setAttribute('href', '#'+link)
+                    })
+                });
+                el.setAttribute('onclick', 'return false;');
+                el.setAttribute('ss-turbo-link', link)
+
+            }
         })
+    };
+
+    ss.onTurbo = function(callback){
+        functions_events.push(callback)
     };
 
     // PROTOTYPE FUNCTIONS

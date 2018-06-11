@@ -112,3 +112,26 @@ ss.mobileswipe({
   }
 }) //This function can be used once
 ```
+
+# Beta Functions
+### TurboOn
+Why use TurboOn ?  
+`TurboOn was created to free up your browser resources and server bandwidth by reloading only what is important for the navigation.`  
+Make page transitions on your website faster
+```javascript
+ss.turboOn(); // Just add this on your javascript code for launch the beast
+```
+If you didn't want to reload your javascript resources you can add a property to indicate this
+```html
+<script ss-turbo-reload="false">
+    ss.turboOn();
+</script>
+<!-- ss-turbo-reload="false" indicate to turboOn to don't reload this resource -->
+```
+### onTurbo Event
+If you want to execute a function each time a page is loaded, you can do it with this function
+```javascript
+ss.onTurbo(function(pageName){
+  console.log(pageName);
+});
+```
