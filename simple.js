@@ -409,13 +409,13 @@ let ss = Object;
 
     ss.prototype.isVisible = function(){
         // (We do not reinvent the wheel) The original function is here : https://www.developpez.net/forums/d671773/webmasters-developpement-web/general-conception-web/contribuez/src-savoir-element-visible-l-ecran/
-        let cadreVisible = {xMin: 0, xMax: 0, yMin: 0, yMax: 0}, elementVisible = {xMin: 0, xMax: 0, yMin: 0, yMax: 0};
+        let ccVisible = {xMin: 0, xMax: 0, yMin: 0, yMax: 0}, elementVisible = {xMin: 0, xMax: 0, yMin: 0, yMax: 0};
         let source = this, sourceParent = source.offsetParent;
         let total = {hauteur: false, largeur: false}, partiel = {hauteur: false, largeur: false};
-        cadreVisible.xMin = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft;
-        cadreVisible.xMax = window.pageXOffset + window.innerWidth || document.documentElement.scrollLeft + document.documentElement.clientWidth || document.body.scrollLeft + document.body.clientWidth;
-        cadreVisible.yMin = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-        cadreVisible.yMax = window.pageYOffset + window.innerHeight || document.documentElement.scrollTop + document.documentElement.clientHeight || document.body.scrollTop + document.body.clientHeight;
+        ccVisible.xMin = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft;
+        ccVisible.xMax = window.pageXOffset + window.innerWidth || document.documentElement.scrollLeft + document.documentElement.clientWidth || document.body.scrollLeft + document.body.clientWidth;
+        ccVisible.yMin = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        ccVisible.yMax = window.pageYOffset + window.innerHeight || document.documentElement.scrollTop + document.documentElement.clientHeight || document.body.scrollTop + document.body.clientHeight;
         elementVisible.xMin = source.offsetLeft;
         elementVisible.yMin = source.offsetTop;
         while(sourceParent) {
@@ -425,16 +425,16 @@ let ss = Object;
         }
         elementVisible.xMax = elementVisible.xMin + source.offsetWidth;
         elementVisible.yMax = elementVisible.yMin + source.offsetHeight;
-        if(cadreVisible.xMin <= elementVisible.xMin && cadreVisible.xMax >= elementVisible.xMax){
+        if(ccVisible.xMin <= elementVisible.xMin && ccVisible.xMax >= elementVisible.xMax){
             total.largeur = true;
         }
-        else if(!(cadreVisible.xMax < elementVisible.xMin || cadreVisible.xMin > elementVisible.xMax)){
+        else if(!(ccVisible.xMax < elementVisible.xMin || ccVisible.xMin > elementVisible.xMax)){
             partiel.largeur = true;
         }
-        if(cadreVisible.yMin <= elementVisible.yMin && cadreVisible.yMax >= elementVisible.yMax){
+        if(ccVisible.yMin <= elementVisible.yMin && ccVisible.yMax >= elementVisible.yMax){
             total.hauteur = true;
         }
-        else if(!(cadreVisible.yMax < elementVisible.yMin || cadreVisible.yMin > elementVisible.yMax)){
+        else if(!(ccVisible.yMax < elementVisible.yMin || ccVisible.yMin > elementVisible.yMax)){
             partiel.hauteur = true;
         }
         if(total.largeur && total.hauteur){
@@ -466,19 +466,12 @@ let ss = Object;
             if(this.length > 1){
                 goto = goto[0];
             }
-            console.log([goto.offsetTop, window.screen.availHeight, window.scrollY])
+
             let scrollStep = goto.getBoundingClientRect().y / (scrollDuration / 15),
-                tmp_nbr = 0,
                 scrollInterval = setInterval(function(){
-                    tmp_nbr++;
-                    // window.scrollY !== goto.getBoundingClientRect().y ||
-                    if (!(goto.offsetTop < window.screen.availHeight && goto.offsetTop > window.scrollY) && !(goto.offsetTop < window.screen.availHeight && goto.offsetTop > (window.scrollY - window.screen.availHeight))) {
-                        // console.log(goto)
+                    if(!(goto.offsetTop === document.body.scrollHeight) && !(document.body.scrollHeight === document.body.clientHeight && goto.isVisible())){
+                        console.log(goto.isVisible())
                         window.scrollBy( goto.offsetTop, scrollStep );
-                        // tmp_duration--;
-                        // if(tmp_duration === 0){
-                        //     clearInterval(scrollInterval);
-                        // }
                     }
                     else clearInterval(scrollInterval);
                 },15);
