@@ -470,7 +470,6 @@ let ss = Object;
             let scrollStep = goto.getBoundingClientRect().y / (scrollDuration / 15),
                 scrollInterval = setInterval(function(){
                     if(!(goto.offsetTop === document.body.scrollHeight) && !(document.body.scrollHeight === document.body.clientHeight && goto.isVisible())){
-                        console.log(goto.isVisible())
                         window.scrollBy( goto.offsetTop, scrollStep );
                     }
                     else clearInterval(scrollInterval);
