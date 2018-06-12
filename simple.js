@@ -475,6 +475,7 @@ let ss = Object;
                     else clearInterval(scrollInterval);
                 },15);
         }
+        return this;
     };
 
 })(ss || (ss = {}));

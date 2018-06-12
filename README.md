@@ -134,3 +134,16 @@ ss.onTurbo(function(pageName){
   console.log(pageName);
 });
 ```
+
+### scrollToThis
+`scrollToThis is a function to scroll the page up to your element`
+```javascript
+const ms = 1000; // time in ms
+ss.el('#element').scrollToThis(ms);
+```
+
+### isVisible
+`isVisible is a function that returns true if the item is displayed on the screen or false if it is not`
+```javascript
+ss.el('#element').isVisible(); //return true or false
+```
