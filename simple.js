@@ -63,11 +63,12 @@ let ss = Object;
             let xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-                    default_params.success(xmlHttp.responseText);
+                    default_params.success(xmlHttp.response);
             };
 
             xmlHttp.timeout = 4000;
             xmlHttp.open("POST", url, true);
+            xmlHttp.overrideMimeType("text/plain");
             xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlHttp.send(ss.jsonToUrl(default_params.params));
         }
@@ -108,10 +109,11 @@ let ss = Object;
             let xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-                    default_params.success(xmlHttp.responseText);
+                    default_params.success(xmlHttp.response);
             };
 
             xmlHttp.timeout = 4000;
+            xmlHttp.overrideMimeType("text/plain");
             xmlHttp.open("GET", url, true);
             xmlHttp.send(ss.jsonToUrl(default_params.params));
         }
@@ -253,7 +255,13 @@ let ss = Object;
 
     ss.turboOn = function(){
         actual_turbo_page = window.location.pathname;
-        ss.el('a').forEach((el) => {
+        let tmp_a = [];
+        if(ss.el('a').length === undefined){
+            tmp_a.push(ss.el('a'));
+        } else {
+            tmp_a = ss.el('a');
+        }
+        tmp_a.forEach((el) => {
             let link = el.getAttribute('href');
             if(link.indexOf(window.location.host) === -1 && link.substr(0, 4) === 'http'){
                 return false
