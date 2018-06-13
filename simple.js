@@ -217,9 +217,9 @@ let ss = Object;
 
     let actual_turbo_page = 'nolaunched.nodejs';
     let functions_events = [];
-    const execute_all_turbo_functions = function(){
+    const execute_all_turbo_functions = function(before){
       functions_events.forEach((callback) => {
-          callback(window.location.pathname);
+          callback(before, window.location.pathname);
       });
     };
 
@@ -242,10 +242,11 @@ let ss = Object;
                                e.remove();
                            }
                        });
+                       let before = document.body;
                        document.head = extdom.head;
                        document.body = extdom.body;
                        ss.turboOn();
-                       execute_all_turbo_functions();
+                       execute_all_turbo_functions(before);
                    }
                }
            })
@@ -284,10 +285,11 @@ let ss = Object;
                                         e.remove();
                                     }
                                 });
+                                let before = document.body;
                                 document.head = extdom.head;
                                 document.body = extdom.body;
                                 ss.turboOn();
-                                execute_all_turbo_functions();
+                                execute_all_turbo_functions(before);
                             }
                         }
                     })

@@ -130,7 +130,7 @@ If you didn't want to reload your javascript resources you can add a property to
 ### onTurbo Event
 If you want to execute a function each time a page is loaded, you can do it with this function
 ```javascript
-ss.onTurbo(function(pageName){
+ss.onTurbo(function(beforeBody, pageName){
   console.log(pageName);
 });
 ```
