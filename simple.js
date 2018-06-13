@@ -458,23 +458,8 @@ let ss = Object;
         }
     };
 
-    ss.prototype.scrollToThis = function(scrollDuration = 2000){
-        if(this.length === 0){
-            console.warn("I can't find the position of your element")
-        } else {
-            let goto = this;
-            if(this.length > 1){
-                goto = goto[0];
-            }
-
-            let scrollStep = goto.getBoundingClientRect().y / (scrollDuration / 15),
-                scrollInterval = setInterval(function(){
-                    if(!(goto.offsetTop === document.body.scrollHeight) && !(document.body.scrollHeight === document.body.clientHeight && goto.isVisible())){
-                        window.scrollBy( goto.offsetTop, scrollStep );
-                    }
-                    else clearInterval(scrollInterval);
-                },15);
-        }
+    ss.prototype.scrollToThis = function(){
+        this.scrollIntoView({behavior: "smooth", inline: "nearest"});
         return this;
     };
 
