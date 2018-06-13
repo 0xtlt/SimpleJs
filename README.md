@@ -138,8 +138,7 @@ ss.onTurbo(function(pageName){
 ### scrollToThis
 `scrollToThis is a function to scroll the page up to your element`
 ```javascript
-const ms = 1000; // time in ms
-ss.el('#element').scrollToThis(ms);
+ss.el('#element').scrollToThis();
 ```
 
 ### isVisible
