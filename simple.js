@@ -263,7 +263,7 @@ let ss = Object;
         }
         tmp_a.forEach((el) => {
             let link = el.getAttribute('href');
-            if(link.indexOf(window.location.host) === -1 && link.substr(0, 4) === 'http'){
+            if((link.indexOf(window.location.host) === -1 && link.substr(0, 4) === 'http')|| (link.substr(0, 1) === '#')){
                 return false
             } else {
                 el.press((e) => {
