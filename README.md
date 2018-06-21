@@ -146,3 +146,25 @@ ss.el('#element').scrollToThis();
 ```javascript
 ss.el('#element').isVisible(); //return true or false
 ```
+
+### write
+`write does a little animation as if the user is writing`
+```javascript
+const speed = 1000; //ms
+const callback = function(element, text){
+
+};
+ss.el('#element').write('Text', speed, callback)
+```
+
+### rand
+`make a random chain`
+```javascript
+const params = {
+  length: 10,
+  alphabet: true, // abcdefghijklmnopqrstuvwxyzAZERTYUIOPQSDFGHJKLMWXCVBN
+  numbers: true, // 0123456789
+  extra: true // &@*µ£$./°
+};
+ss.rand(params); // params is not necessary
+```

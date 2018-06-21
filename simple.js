@@ -232,12 +232,12 @@ let ss = Object;
                        console.warn('error on turboOn() call function')
                    } else {
                        let extdom = (new DOMParser()).parseFromString(result, "text/html");
-                       extdom.body.sel('script').forEach((e) => {
+                       extdom.body.el('script').forEach((e) => {
                            if(e.getAttribute('ss-turbo-reload') === 'false'){
                                e.remove();
                            }
                        });
-                       extdom.head.sel('script').forEach((e) => {
+                       extdom.head.el('script').forEach((e) => {
                            if(e.getAttribute('ss-turbo-reload') === 'false'){
                                e.remove();
                            }
@@ -275,12 +275,12 @@ let ss = Object;
                                 console.error('error on turboOn() call function')
                             } else {
                                 let extdom = (new DOMParser()).parseFromString(result, "text/html");
-                                extdom.body.sel('script').forEach((e) => {
+                                extdom.body.el('script').forEach((e) => {
                                     if(e.getAttribute('ss-turbo-reload') === 'false'){
                                         e.remove();
                                     }
                                 });
-                                extdom.head.sel('script').forEach((e) => {
+                                extdom.head.el('script').forEach((e) => {
                                     if(e.getAttribute('ss-turbo-reload') === 'false'){
                                         e.remove();
                                     }
@@ -305,9 +305,61 @@ let ss = Object;
         functions_events.push(callback)
     };
 
+    ss.rand = function(params){
+        let def = {
+            length: 10,
+            alphabet: true,
+            numbers: true,
+            extra: true
+        }
+
+        if(params){
+            if(params.length !== undefined){
+                def.length = params.length
+            }
+            if(params.alphabet !== undefined){
+                def.alphabet = params.alphabet
+            }
+            if(params.numbers !== undefined){
+                def.numbers = params.numbers
+            }
+            if(params.extra !== undefined){
+                def.extra = params.extra
+            }
+        }
+
+        let alpha = 'abcdefghijklmnopqrstuvwxyzAZERTYUIOPQSDFGHJKLMWXCVBN';
+        let num = '0123456789';
+        let extra = '&@*µ£$./°';
+        let end = '';
+        if(def.alphabet){
+            end += alpha;
+        }
+        if(def.numbers){
+            end += num;
+        }
+        if(def.extra){
+            end += extra;
+        }
+        let text = '';
+        for(n=0;n<=def.length;n++){
+            text += end[Math.floor((Math.random() * end.length) + 0)]
+        }
+        return text;
+    };
+
+    ss.randomColor = function(){
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+
     // PROTOTYPE FUNCTIONS
 
-    ss.prototype.sel = function (el) {
+    ss.prototype.el = function (el) {
         let le = this.querySelectorAll(el);
         if(le.length === 1){
             return le[0]
@@ -471,6 +523,21 @@ let ss = Object;
     ss.prototype.scrollToThis = function(){
         this.scrollIntoView({behavior: "smooth", inline: "nearest"});
         return this;
+    };
+
+    ss.prototype.write = function(text, speed, finish = function (){}, step = 1){
+        let _length = text.length;
+        let time = speed / _length;
+        setTimeout(() => {
+            if(step - 1 !== _length){
+                this.html(text.substr(0, step));
+                this.write(text, speed, finish, step + 1);
+            } else {
+                if(typeof finish == 'function'){
+                    finish(this, text);
+                }
+            }
+        }, time);
     };
 
 })(ss || (ss = {}));
