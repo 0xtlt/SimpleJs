@@ -538,6 +538,8 @@ let ss = Object;
                 }
             }
         }, time);
+
+        return this;
     };
 
 })(ss || (ss = {}));
