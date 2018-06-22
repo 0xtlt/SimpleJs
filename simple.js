@@ -469,7 +469,7 @@ let ss = Object;
             return this
     };
 
-    ss.prototype.isVisible = function(){
+    ss.prototype.isVisible = function(returnNumber = false){
         // (We do not reinvent the wheel) The original function is here : https://www.developpez.net/forums/d671773/webmasters-developpement-web/general-conception-web/contribuez/src-savoir-element-visible-l-ecran/
         let ccVisible = {xMin: 0, xMax: 0, yMin: 0, yMax: 0}, elementVisible = {xMin: 0, xMax: 0, yMin: 0, yMax: 0};
         let source = this, sourceParent = source.offsetParent;
@@ -500,23 +500,43 @@ let ss = Object;
             partiel.hauteur = true;
         }
         if(total.largeur && total.hauteur){
-            return true
+            if(returnNumber){
+                return 1
+            } else {
+                return true
+            }
         }
         else if(total.largeur && partiel.hauteur){
             // return(this + ' est entièrement visible en largeur mais tronqué en hauteur');
-            return false
+            if(returnNumber){
+                return 0.5
+            } else {
+                return false
+            }
         }
         else if(total.hauteur && partiel.largeur){
             // return(this + ' est entièrement visible en hauteur mais tronqué en largeur');
-            return true
+            if(returnNumber){
+                return 0.5
+            } else {
+                return true
+            }
         }
         else if(partiel.hauteur && partiel.largeur){
             // return(this + ' est tronqué en hauteur et en largeur');
-            return false
+            if(returnNumber){
+                return 0
+            } else {
+                return false
+            }
         }
         else{
             // return(this + ' n\'est pas visible dans la page !');
-            return false
+            if(returnNumber){
+                return 0
+            } else {
+                return false
+            }
         }
     };
 

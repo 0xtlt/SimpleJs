@@ -145,6 +145,7 @@ ss.el('#element').scrollToThis();
 `isVisible is a function that returns true if the item is displayed on the screen or false if it is not`
 ```javascript
 ss.el('#element').isVisible(); //return true or false
+ss.el('#element').isVisible(true); // returns 1 if the element is totally visible or 0.5 if it is partially visible or 0 if it is not visible
 ```
 
 ### write
